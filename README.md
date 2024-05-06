@@ -2,9 +2,18 @@
 
 This is a recipe for integrating Stripe into an Astro project. It uses the Stripe API to create a checkout session and then redirects the user to the Stripe hosted checkout page.
 
-## Usage
+## 🔨Usage
 
 You can [open this in Stackblitz](https://stackblitz.com/~/github.com/zellwk/stripe-astro-recipe) or download the source code.
+
+Fill in your environment variables in `.env`:
+
+```env
+STRIPE_KEY="sk_<your api key>"
+PUBLIC_STRIPE_KEY="pk_<your api key>"
+```
+
+Then run the following commands.
 
 ## 🧞 Commands
 

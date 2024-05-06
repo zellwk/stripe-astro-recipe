@@ -12,8 +12,7 @@
   "dependencies": {
     "@stripe/stripe-js": "^3.3.0",
     "astro": "^4.7.0",
-    "stripe": "^15.4.0",
-    "zl-fetch": "^6.0.2"
+    "stripe": "^15.4.0"
   },
   "devDependencies": {
     "sass": "^1.75.0"

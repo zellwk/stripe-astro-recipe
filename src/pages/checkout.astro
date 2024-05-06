@@ -1,0 +1,37 @@
+---
+import Stripe from 'stripe'
+
+const PUBLIC_STRIPE_KEY = import.meta.env.PUBLIC_STRIPE_KEY
+const stripe = new Stripe(import.meta.env.STRIPE_KEY)
+const { origin } = Astro.url
+const session = await stripe.checkout.sessions.create({
+  ui_mode: 'embedded',
+  mode: 'subscription',
+  line_items: [
+    {
+      price: 'price_1PBRXWD4vqGVQmppgfrXaqri',
+      quantity: 1,
+    },
+  ],
+  return_url: `${origin}/return?session_id={CHECKOUT_SESSION_ID}`,
+  automatic_tax: { enabled: true },
+})
+---
+
+<div id="checkout" data-stripe-key={PUBLIC_STRIPE_KEY} data-client-secret={session.client_secret}>
+  <!-- Checkout will insert the payment form here -->
+</div>
+
+<script>
+  import { loadStripe } from '@stripe/stripe-js';
+  const checkoutDiv = document.querySelector('#checkout')
+  const {clientSecret, stripeKey} = checkoutDiv.dataset
+
+  const stripe = await loadStripe(stripeKey);
+  const checkout = await stripe.initEmbeddedCheckout({
+    fetchClientSecret: () => clientSecret
+  });
+
+  // Mount Checkout
+  checkout.mount('#checkout');
+</script>
